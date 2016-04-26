@@ -88,9 +88,25 @@ $(document).ready(function() {
     // console.log('target', distances[keysSorted[1].toString()]);
     // console.log('originalstar', distances[0]);
 
+    //to match target to star obj inside windows.stars
+    //loop through window.stars with forEach(funciton(star))
+    //if star === target, 
+      //wind
+    
+
     var target = distances[keysSorted[1]];
-    console.log(this);
     target.explode();
+    
+    window.stars.forEach(function(star,i) {
+      // console.log('deep', deepEqual(target, star))
+      // console.log('nondeep', star === target)
+      if (star === target) { // need deep equals function from precourse
+        window.stars.splice(i, 1)
+      }
+    });
+    // console.log('target:', target);
+
+    // target.remove();
     // console.log(window.stars[keysSorted[1]]);
     // window.stars[keysSorted[1]].explode();
 
