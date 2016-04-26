@@ -27,3 +27,15 @@ starDancer.prototype.randColor = function () {
   return 'rgb('+ rand.join(',') +')';
 
 };
+starDancer.prototype.explode = function () {
+
+  // show star using .show()
+  this.$node.show();
+
+  // then explode
+  this.$node.show("explode", {pieces: 144}, 100);
+  this.$node.css('border-color', this.randColor());
+  this.$node.hide("explode", {pieces: 144}, 750);
+
+  this.$node.remove();
+};

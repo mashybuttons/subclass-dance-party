@@ -1,5 +1,6 @@
 $(document).ready(function() {
   window.dancers = [];
+  window.stars = []
 
   $('.addDancerButton').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
@@ -27,10 +28,15 @@ $(document).ready(function() {
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.floor(Math.random() * 3000) + 2000
+      Math.floor(Math.random() * 2000) + 1000
     );
+
+    if(dancer.constructor === starDancer) {
+      window.stars.push(dancer)
+      console.log(window.stars)
+    }
     window.dancers.push(dancer);
-   
+
     $('body').append(dancer.$node);
 
   });      
@@ -48,8 +54,7 @@ $(document).ready(function() {
     });
   });
 
-
-  $('body').on('click', '.star, .colored-dancer, .dancer', function(event) {
+  $('body').on('click', '.star', function(event) {
     var top = this.style.top;
     var left = this.style.left;
     var distances = {};
@@ -57,35 +62,59 @@ $(document).ready(function() {
     
     top = Math.round(+top.slice(0, -2));
     left = Math.round(+left.slice(0, -2));
-    window.dancers.forEach(function(dancer) {
-      var a = Math.pow(dancer.top - top, 2);
-      var b = Math.pow(dancer.left - left, 2);
+    window.stars.forEach(function(star) {
+      // setting first star (which is "closest" star)
+      // if (Math.round(star.top) === top && Math.round(star.left) === left) {
+      //   distances['0'] = star
+      // }
+      var a = Math.pow(star.top - top, 2);
+      var b = Math.pow(star.left - left, 2);
       var dist = Math.sqrt(a + b);
 
-      distances[dist] = dancer;
-      // if (Math.round(dancer.top) === top && Math.round(dancer.left) === left) {
-      //   // dancer.step = function() {
-      //   //   dancer.$node.show( 'explode', {pieces: 144}, 100);
-      //   //   dancer.$node.hide( 'explode', {pieces: 144}, 750);
-      //   //   dancer.$node.remove();
-      //   // };
-      //   // dancer.step();
-        
-      // }
-
+      distances[dist] = star;
+      // console.log(distances);
     });
 
     for (var key in distances) {
+      // console.log(distances);
       keysSorted.push(+key);
     }
     keysSorted.sort(function(a, b) {
       return a - b;
     });
-    console.log(keysSorted);
-  });
+    // console.log('keysSorted:', keysSorted);
+    // console.log('distances;', distances);
+    // console.log(keysSorted[1].toString())
+    // console.log('target', distances[keysSorted[1].toString()]);
+    // console.log('originalstar', distances[0]);
+
+    var target = distances[keysSorted[1]];
+    console.log(this);
+    target.explode();
+    // console.log(window.stars[keysSorted[1]]);
+    // window.stars[keysSorted[1]].explode();
+
+    // remove from list once clicked. access it using the $this function
+
+  }); 
+
+
+  $('body').on('click', '.star, .colored-dancer, .dancer', function(event) {
+
+      // if (Math.round(dancer.top) === top && Math.round(dancer.left) === left) {
+      //   dancer.step = function() {
+  //        this.$node.show("explode", {pieces: 144}, 100);
+  // this.$node.css('border-color', this.randColor());
+  // this.$node.hide("explode", {pieces: 144}, 750);
+  // this.$node.remove();
+      // }
+
+
+
+
   //dancer on click
   //this.dancer .top and .right
 
 
+  });
 });
-

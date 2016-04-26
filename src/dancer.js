@@ -34,10 +34,12 @@ var makeDancer = function(top, left, timeBetweenSteps) {
 };
 
 makeDancer.prototype.step = function() {
-  setTimeout(function() {
+  return setTimeout(function() {
     this.step();
     //console.log(makeDancer.prototype)
   }.bind(this), this.timeBetweenSteps);
+
+
 };
 
 makeDancer.prototype.lineup = function(top, left) {
