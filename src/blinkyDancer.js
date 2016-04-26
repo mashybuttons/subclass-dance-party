@@ -35,6 +35,10 @@ makeBlinkyDancer.prototype.step = function() {
   // call the old version of step at the beginning of any call to this new version of step
   // this.oldStep
   makeDancer.prototype.step.call(this);
+
+   /// MAYBE can just delte this to step once
+
+   
   // console.log(makeDancer.prototype.step.call(this));
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
@@ -47,5 +51,10 @@ makeBlinkyDancer.prototype.step = function() {
   this.$node.show("explode", {pieces: 144}, 100);
   this.$node.css('border-color', this.randColor());
   this.$node.hide("explode", {pieces: 144}, 750);
+  debugger;
   this.$node.remove();
+  //use cleratimeout, save the return value of timeout
+  //remove expldoed dancer from window.dancer
+  clearTImeout(a)
+  console.log(window.dancers)
 };

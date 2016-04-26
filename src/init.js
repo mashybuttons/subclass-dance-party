@@ -52,19 +52,36 @@ $(document).ready(function() {
   $('body').on('click', '.star, .colored-dancer, .dancer', function(event) {
     var top = this.style.top;
     var left = this.style.left;
-  
+    var distances = {};
+    var keysSorted = [];
+    
     top = Math.round(+top.slice(0, -2));
     left = Math.round(+left.slice(0, -2));
     window.dancers.forEach(function(dancer) {
-      if (Math.round(dancer.top) === top && Math.round(dancer.left) === left) {
-        dancer.step = function() {
-          dancer.$node.show( 'explode', {pieces: 144}, 100);
-          dancer.$node.hide( 'explode', {pieces: 144}, 750);
-          dancer.$node.remove();
-        };
-        dancer.step();
-      }
+      var a = Math.pow(dancer.top - top, 2);
+      var b = Math.pow(dancer.left - left, 2);
+      var dist = Math.sqrt(a + b);
+
+      distances[dist] = dancer;
+      // if (Math.round(dancer.top) === top && Math.round(dancer.left) === left) {
+      //   // dancer.step = function() {
+      //   //   dancer.$node.show( 'explode', {pieces: 144}, 100);
+      //   //   dancer.$node.hide( 'explode', {pieces: 144}, 750);
+      //   //   dancer.$node.remove();
+      //   // };
+      //   // dancer.step();
+        
+      // }
+
     });
+
+    for (var key in distances) {
+      keysSorted.push(+key);
+    }
+    keysSorted.sort(function(a, b) {
+      return a - b;
+    });
+    console.log(keysSorted);
   });
   //dancer on click
   //this.dancer .top and .right
