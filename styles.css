@@ -20,8 +20,30 @@ body, a:link, a:visited, a:active{
 .title{
   background-color: #777;
 }
-.dancer{
-  border:10px solid red;
+
+/* $node referring to .dancer and .colored-dancer */
+.dancer{ 
+  border:25px solid red;
+  border-radius:25px;
+  position:absolute;
+
+}
+/*.dancer:active {
+  border:20px solid green;
+  border-radius:20px;
+  position:absolute;
+}*/
+.colored-dancer {
+  border:10px solid blue;
   border-radius:10px;
   position:absolute;
+
 }
+
+./*dancer {
+    color:white;
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    position:absolute;
+}*/
