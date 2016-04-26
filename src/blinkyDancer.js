@@ -27,9 +27,9 @@ makeBlinkyDancer.prototype.randColor = function () {
   return 'rgb('+ rand.join(',') +')';
 
 };
-makeBlinkyDancer.prototype.lineup = function(top, left) {
-  this.setPosition(top, left);
-};
+// makeBlinkyDancer.prototype.lineup = function(top, left) {
+//   this.setPosition(top, left);
+// };
 
 makeBlinkyDancer.prototype.step = function() {
   // call the old version of step at the beginning of any call to this new version of step

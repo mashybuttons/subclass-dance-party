@@ -40,6 +40,10 @@ makeDancer.prototype.step = function() {
   }.bind(this), this.timeBetweenSteps);
 };
 
+makeDancer.prototype.lineup = function(top, left) {
+  this.setPosition(top, left);
+};
+
 makeDancer.prototype.setPosition = function(top, left) {
   var styleSettings = {
     top: top,

@@ -40,10 +40,11 @@ body, a:link, a:visited, a:active{
 
 }
 
-./*dancer {
-    color:white;
-    width: 100px;
-    height: 100px;
-    background: #ccc;
-    position:absolute;
-}*/
+.star {
+  /*background-image: url("mariostar.png");*/
+  position:absolute;
+}
+.star img {
+  height: 50px;
+  width: 50px;
+}
