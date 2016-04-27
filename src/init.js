@@ -18,13 +18,11 @@ $(document).ready(function() {
      */
      
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-       // console.log('WHY!?', dancerMakerFunctionName);
 
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
-    // make a dancer with a random position
-    
+    // make a dancer with a random position    
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
@@ -63,74 +61,37 @@ $(document).ready(function() {
     top = Math.round(+top.slice(0, -2));
     left = Math.round(+left.slice(0, -2));
     window.stars.forEach(function(star) {
-      // setting first star (which is "closest" star)
-      // if (Math.round(star.top) === top && Math.round(star.left) === left) {
-      //   distances['0'] = star
-      // }
+
       var a = Math.pow(star.top - top, 2);
       var b = Math.pow(star.left - left, 2);
       var dist = Math.sqrt(a + b);
 
       distances[dist] = star;
-      // console.log(distances);
     });
 
     for (var key in distances) {
-      // console.log(distances);
       keysSorted.push(+key);
     }
     keysSorted.sort(function(a, b) {
       return a - b;
     });
-    // console.log('keysSorted:', keysSorted);
-    // console.log('distances;', distances);
-    // console.log(keysSorted[1].toString())
-    // console.log('target', distances[keysSorted[1].toString()]);
-    // console.log('originalstar', distances[0]);
 
-    //to match target to star obj inside windows.stars
-    //loop through window.stars with forEach(funciton(star))
-    //if star === target, 
-      //wind
-    
 
     var target = distances[keysSorted[1]];
     target.explode();
     
     window.stars.forEach(function(star,i) {
-      // console.log('deep', deepEqual(target, star))
-      // console.log('nondeep', star === target)
       if (star === target) { // need deep equals function from precourse
         window.stars.splice(i, 1)
       }
     });
-    // console.log('target:', target);
 
-    // target.remove();
-    // console.log(window.stars[keysSorted[1]]);
-    // window.stars[keysSorted[1]].explode();
-
-    // remove from list once clicked. access it using the $this function
 
   }); 
 
 
-  $('body').on('click', '.star, .colored-dancer, .dancer', function(event) {
-
-      // if (Math.round(dancer.top) === top && Math.round(dancer.left) === left) {
-      //   dancer.step = function() {
-  //        this.$node.show("explode", {pieces: 144}, 100);
-  // this.$node.css('border-color', this.randColor());
-  // this.$node.hide("explode", {pieces: 144}, 750);
-  // this.$node.remove();
-      // }
-
-
-
-
-  //dancer on click
-  //this.dancer .top and .right
-
+  $('body').on('mouseover', '.star, .colored-dancer, .dancer', function(event) {
+    $(this).effect("pulsate");
 
   });
 });

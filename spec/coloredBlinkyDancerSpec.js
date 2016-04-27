@@ -1,34 +1,52 @@
 describe('coloredBlinkyDancer', function() {
 
-  var coloredBlinkyDancer, clock;
+  var coloredBlinky, clock;
   var timeBetweenSteps = 100;
 
   beforeEach(function() {
     clock = sinon.useFakeTimers();
-    coloredBlinkyDancer = new coloredBlinkyDancer(10, 20, timeBetweenSteps);
+    coloredBlinky = new coloredBlinkyDancer(10, 20, timeBetweenSteps);
   });
 
   it('should have a jQuery $node object', function() {
-    expect(coloredBlinkyDancer.$node).to.be.an.instanceof(jQuery);
+    expect(coloredBlinky.$node).to.be.an.instanceof(jQuery);
   });
 
-  it('should have a step function that makes its node blink', function() {
-    sinon.spy(coloredBlinkyDancer.$node, 'toggle');
-    coloredBlinkyDancer.step();
-    expect(coloredBlinkyDancer.$node.toggle.called).to.be.true;
+  it('should have a step function that makes its node show', function() {
+    sinon.spy(coloredBlinky.$node, 'show');
+    coloredBlinky.step();
+    expect(coloredBlinky.$node.show.called).to.be.true;
   });
 
   describe('dance', function() {
     it('should call step at least once per second', function() {
-      sinon.spy(coloredBlinkyDancer, 'step');
-      expect(coloredBlinkyDancer.step.callCount).to.be.equal(0);
+      sinon.spy(coloredBlinky, 'step');
+      expect(coloredBlinky.step.callCount).to.be.equal(0);
       // clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
       clock.tick(timeBetweenSteps);
 
-      expect(coloredBlinkyDancer.step.callCount).to.be.equal(1);
+      expect(coloredBlinky.step.callCount).to.be.equal(1);
 
       clock.tick(timeBetweenSteps);
-      expect(coloredBlinkyDancer.step.callCount).to.be.equal(2);
+      expect(coloredBlinky.step.callCount).to.be.equal(2);
+    });
+  });
+
+  describe('lineup', function() {
+    it('should be inherit lineup function', function() {
+      // sinon.spy(coloredBlinky, 'lineup');
+      expect(makeDancer.prototype.lineup).to.be.equal(coloredBlinky.lineup);
+    });
+  });
+
+  describe('color', function() {
+    it('show change color', function() {
+      expect(coloredBlinky.$node[0].style.borderColor).to.be.empty;
+      coloredBlinky.step();
+      var var1 = coloredBlinky.$node[0].style.borderColor;
+      coloredBlinky.step();
+      // sinon.spy(coloredBlinky, 'lineup');
+      expect(coloredBlinky.$node[0].style.borderColor).to.not.equal(var1);
     });
   });
 });
